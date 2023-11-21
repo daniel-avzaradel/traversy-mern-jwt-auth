@@ -16,6 +16,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
   const { name, email, password } = req.body;
   const UserExists = await User.findOne({ email });
+  console.log(UserExists);
 
   if (UserExists) {
     res.status(400);
