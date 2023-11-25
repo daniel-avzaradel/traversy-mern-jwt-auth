@@ -1,4 +1,4 @@
-import asyncHandler from 'express-async-handler'
+import asyncHandler from 'express-async-handler';
 
 const notFound = asyncHandler(async (req, res, next) => {
     const error = new Error(`Error found: ${req.originalUrl}`);

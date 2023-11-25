@@ -1,8 +1,9 @@
-// Authenticate user
+import asyncHandler from 'express-async-handler';
 
+// Authenticate user
 const authUser = async (req, res) => {
-  console.log("auth user");
-};
+    res.status(200).send('auth user')
+}
 
 const loginUser = async (req, res) => {
   console.log("login user");
