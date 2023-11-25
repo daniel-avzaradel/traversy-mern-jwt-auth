@@ -2,9 +2,11 @@ import express from "express";
 import colors from 'colors';
 import dotenv from 'dotenv';
 import { errorHandler, notFound } from "./middlewares/asyncHandler.js";
-import router from "./routes/userRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
+import connectDB from "./config/db.js";
 
 dotenv.config();
+connectDB();
 
 const app = express();
 const PORT = process.env.PORT || 5000
@@ -12,7 +14,7 @@ const PORT = process.env.PORT || 5000
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/api/users', router);
+app.use('/api/users', userRoutes);
 
 app.use(notFound);
 app.use(errorHandler);

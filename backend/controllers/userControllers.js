@@ -2,6 +2,7 @@ import asyncHandler from 'express-async-handler';
 
 // Authenticate user
 const authUser = async (req, res) => {
+    console.log('User authorized');
     res.status(200).send('auth user')
 }
 
@@ -25,10 +26,6 @@ const logoutUser = async (req, res) => {
   console.log("logout user");
 };
 
-const deleteUser = async (req, res) => {
-  console.log("delete user");
-};
-
 export {
   authUser,
   loginUser,
@@ -36,5 +33,4 @@ export {
   getUserProfile,
   updateUserProfile,
   logoutUser,
-  deleteUser,
 };
