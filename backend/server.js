@@ -1,6 +1,7 @@
 import express from 'express';
 import colors from 'colors';
 import dotenv from 'dotenv';
+import userRouter from './routes/userRoutes.js'
 
 dotenv.config();
 
@@ -16,6 +17,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/', (req, res) => {
     console.log(`Server is running`.green);
 })
+
+app.use('/api/users', userRouter)
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`.cyan.underline);
