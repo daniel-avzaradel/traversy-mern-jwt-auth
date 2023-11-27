@@ -11,10 +11,12 @@ const PORT = process.env.PORT || 5000
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+
+// routes
 app.use('/', (req, res) => {
     console.log(`Server is running`.green);
 })
 
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`.magenta);
+    console.log(`Server is running on port ${PORT}`.cyan.underline);
 })
