@@ -42,11 +42,43 @@ const registerUser = asyncHandler(async (req, res) => {
 });
 
 const getUserProfile = asyncHandler(async (req, res) => {
-    res.status(200).send('get user')
+
+    const user = await User.findById(req.body._id);
+
+    if (user) {
+        res.status(200).json(user)
+    } else {
+        res.status(404);
+        throw new Error('User not found')
+    }
+
 });
 
 const updateUserProfile = asyncHandler(async (req, res) => {
-    res.status(200).send('updated user')
+    
+    const user = await User.findById(req.body._id);
+
+    if (user) {
+        user.name = req.body.name || user.name;
+        user.email = req.body.email || user.email;
+        
+        if (req.body.password) {
+            user.password = req.body.password;
+        }
+        
+        const updatedUser = await user.save();
+        
+        res.status(200).json({
+            _id: updatedUser._id,
+            name: updatedUser.name,
+            email: updatedUser.email,
+        })
+
+    } else {
+        res.status(404);
+        throw new Error('User not found')
+    }
+    
 });
 
 export {
