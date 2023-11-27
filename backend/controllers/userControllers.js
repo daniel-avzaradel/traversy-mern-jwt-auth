@@ -4,10 +4,6 @@ const authUser = asyncHandler(async (req, res) => {
     res.status(200).send('auth user')
 });
 
-const loginUser = asyncHandler(async (req, res) => {
-    res.status(200).send('user logged in')
-});
-
 const logoutUser = asyncHandler(async (req, res) => {
     res.status(200).send('user logged out')
 });
@@ -23,3 +19,11 @@ const getUserProfile =  asyncHandler(async (req, res) => {
 const updateUserProfile =  asyncHandler(async (req, res) => {
     res.status(200).send('updated user')
 });
+
+export {
+    authUser,
+    logoutUser,
+    registerUser,
+    getUserProfile,
+    updateUserProfile
+}
