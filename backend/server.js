@@ -12,12 +12,7 @@ const PORT = process.env.PORT || 5000
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
 // routes
-app.use('/', (req, res) => {
-    console.log(`Server is running`.green);
-})
-
 app.use('/api/users', userRouter)
 
 app.listen(PORT, () => {
