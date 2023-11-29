@@ -38,7 +38,14 @@ const logoutUser = asyncHandle(async (req, res) => {
 });
 
 const getUserProfile = asyncHandle(async (req, res) => {
-  res.status(200).send("Logout user");
+  let users = await User.find();
+
+  if (users.length > 0) {
+    res.status(200).json(users)
+  } else {
+    res.status(404);
+    throw new Error('No users found')
+  }
 });
 
 const updateUserProfile = asyncHandle(async (req, res) => {
