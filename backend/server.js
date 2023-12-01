@@ -1,7 +1,9 @@
 import express from "express";
 import colors from 'colors';
 import dotenv from 'dotenv';
+import connectDB from "./config/db";
 
+connectDB();
 dotenv.config();
 const PORT = process.env.PORT || 5000;
 
