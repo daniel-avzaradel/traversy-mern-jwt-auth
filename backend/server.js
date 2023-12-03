@@ -3,8 +3,10 @@ import colors from 'colors';
 import dotenv from 'dotenv';
 import userRoutes from './routes/userRoutes.js';
 import { errorHandler, notFound } from "./middleware/errorHandler.js";
+import connectDB from "./config/db.js";
 
 dotenv.config();
+connectDB();
 const PORT = process.env.PORT || 5000;
 const app = express();
 
