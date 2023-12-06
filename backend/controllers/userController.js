@@ -46,16 +46,25 @@ const registerUser = asyncHandler(async (req, res) => {
     }
 });
 
-const logoutUsere = asyncHandler(async (req, res) => {
-    res.status(200).send('Logout User')
+const logoutUser = asyncHandler(async (req, res) => {
+    res.cookie('jwt', '', {
+        httpOnly: true,
+        expires: Date.now(0)
+    })
+        
+    res.status(200).json({ message: "User logged out" })
 });
 
 const getUserProfile = asyncHandler(async (req, res) => {
+    
+    const user = await User.findById(req.user._id);
 
-    const users = await User.find();
-
-    if (users) {
-        res.status(200).json(users);
+    if (user) {
+        res.status(200).json({
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+        });
     } else {
         res.status(404);
         throw new Error('User not found');
@@ -69,7 +78,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 export {
     authUser,
     registerUser,
-    logoutUsere,
+    logoutUser,
     getUserProfile,
     updateUserProfile
 }
