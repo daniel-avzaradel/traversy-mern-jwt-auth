@@ -51,14 +51,20 @@ const registerUser = asyncHandler(async (req, res) => {
 const logoutUser = asyncHandler(async (req, res) => {
     res.cookie('jwt', '', {
         httpOnly: true,
-        maxAge: new Date(0)
+        expires: new Date(0)
     });
 
     res.status(200).json('User logged out')
 });
 
 const getUserProfile = asyncHandler(async (req, res) => {
-    
+    const user = {
+        _id: req.user._id,
+        name: req.user.name,
+        email: req.user.email,
+    };
+
+    res.status(200).json(user)
 });
 
 const updateUserProfile = asyncHandler(async (req, res) => {
