@@ -8,13 +8,9 @@ const authUser = asyncHandler(async (req, res) => {
 
     const user = await User.findOne({ email });
 
-    if (user) {
-        generateToken(res, user.email);
-        res.status(201).json({
-            _id: user._id,
-            name: user.name,
-            email: user.email,
-        });
+    if (user && user.matchPassword(password)) {
+        generateToken(res, user._id);
+        res.status(201).json(user);
     } else {
         res.status(400);
         throw new Error('Invalid user data');
@@ -38,7 +34,7 @@ const registerUser = asyncHandler(async (req, res) => {
     });
 
     if (user) {
-        generateToken(res, user.email);
+        generateToken(res, user._id);
         res.status(201).json({
             _id: user._id,
             name: user.name,
@@ -55,16 +51,11 @@ const logoutUsere = asyncHandler(async (req, res) => {
 });
 
 const getUserProfile = asyncHandler(async (req, res) => {
-    const { email } = req.body;
 
-    const user = await User.findOne({ email });
+    const users = await User.find();
 
-    if (user) {
-        res.status(201).json({
-            _id: user._id,
-            name: user.name,
-            email: user.email,
-        });
+    if (users) {
+        res.status(200).json(users);
     } else {
         res.status(404);
         throw new Error('User not found');
