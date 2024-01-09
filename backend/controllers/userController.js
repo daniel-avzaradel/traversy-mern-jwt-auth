@@ -74,7 +74,6 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
 
     if (user) {
-        console.log(user);
         user.name = req.body.name || user.name,
         user.email = req.body.email || user.email
         
